@@ -1,0 +1,4 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/maxim/PROGRAMMING/C/work/filller
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/maxim/PROGRAMMING/C/work/filller/cmake-build-debug
