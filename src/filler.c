@@ -13,23 +13,42 @@
 #include "filler.h"
 #include <stdio.h>
 
-void        put_coord(t_filler *f)
+void        put_coord(t_filler *f, int x, int y)
 {
-    ft_putnbr(f->coord.x);
+    ft_putnbr(x);
     ft_putchar(' ');
-    ft_putnbr(f->coord.y);
+    ft_putnbr(y);
     ft_putchar('\n');
+}
+
+void        force_exit(t_filler *f)
+{
+    f->over = 1;
+    put_coord(f, 0, 0);
 }
 
 void        play(t_filler *f)
 {
     char    *line;
-    int     res;
+    int     res = 1;
 
-    res = ft_get_next_line(0, &line);
-    ft_putstr(line);
-    ft_putnbr(res);
-    put_coord(f);
+    while ((ft_get_next_line(0, &line)) > -1 && !f->over)
+    {
+        if (!ft_strncmp(line, "Plateau ", 7))
+        {
+            line = &line[8];
+            parse_map(f, ft_atoi(line), ft_atoi(ft_strchr(line, ' ')));
+        }
+        if (!ft_strncmp(line, "Piece ", 5))
+        {
+            line = &line[6];
+            parse_piece(f, ft_atoi(line), ft_atoi(ft_strchr(line, ' ')));
+        }
+        if (!f->over)
+            put_coord(f, 2 ,2);
+        else
+            force_exit(f);
+    }
 }
 
 int			main(void)

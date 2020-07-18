@@ -70,6 +70,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/fil.dir/libft/ft_unsigned_itoa_base.c.o"
   "CMakeFiles/fil.dir/src/filler.c.o"
   "CMakeFiles/fil.dir/src/initialization.c.o"
+  "CMakeFiles/fil.dir/src/parser.c.o"
   "fil"
   "fil.pdb"
 )

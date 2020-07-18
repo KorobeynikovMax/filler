@@ -216,3 +216,7 @@ CMakeFiles/fil.dir/src/initialization.c.o
  ../includes/filler.h
  ../libft/includes/libft.h
  /Users/bedavis/Desktop/myDocs/fil/src/initialization.c
+CMakeFiles/fil.dir/src/parser.c.o
+ ../includes/filler.h
+ ../libft/includes/libft.h
+ /Users/bedavis/Desktop/myDocs/fil/src/parser.c

@@ -22,8 +22,15 @@ typedef struct          s_filler
 {
     t_point             coord;
     int                 player;
+    int                 over;
+    int                 map_created;
+    char                **map;
+    int                 h;
+    int                 w;
 }                       t_filler;
 
 void                    init(t_filler *f);
+void                    parse_map(t_filler *f, int height, int width);
+t_piece                 parse_piece(t_filler *f, int height, int width);
 
 #endif

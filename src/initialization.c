@@ -15,6 +15,8 @@
 void init(t_filler *f)
 {
     f->player = -1;
-    f->coord.x = 0;
-    f->coord.y = 0;
+    f->over = 0;
+    f->map_created = 0;
+    f->coord.x = 2;
+    f->coord.y = 2;
 }

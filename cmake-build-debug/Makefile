@@ -2040,6 +2040,33 @@ src/initialization.c.s:
 	$(MAKE) -f CMakeFiles/fil.dir/build.make CMakeFiles/fil.dir/src/initialization.c.s
 .PHONY : src/initialization.c.s
 
+src/parser.o: src/parser.c.o
+
+.PHONY : src/parser.o
+
+# target to build an object file
+src/parser.c.o:
+	$(MAKE) -f CMakeFiles/fil.dir/build.make CMakeFiles/fil.dir/src/parser.c.o
+.PHONY : src/parser.c.o
+
+src/parser.i: src/parser.c.i
+
+.PHONY : src/parser.i
+
+# target to preprocess a source file
+src/parser.c.i:
+	$(MAKE) -f CMakeFiles/fil.dir/build.make CMakeFiles/fil.dir/src/parser.c.i
+.PHONY : src/parser.c.i
+
+src/parser.s: src/parser.c.s
+
+.PHONY : src/parser.s
+
+# target to generate assembly for a file
+src/parser.c.s:
+	$(MAKE) -f CMakeFiles/fil.dir/build.make CMakeFiles/fil.dir/src/parser.c.s
+.PHONY : src/parser.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -2262,6 +2289,9 @@ help:
 	@echo "... src/initialization.o"
 	@echo "... src/initialization.i"
 	@echo "... src/initialization.s"
+	@echo "... src/parser.o"
+	@echo "... src/parser.i"
+	@echo "... src/parser.s"
 .PHONY : help
 
 

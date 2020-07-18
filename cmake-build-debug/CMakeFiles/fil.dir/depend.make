@@ -216,3 +216,7 @@ CMakeFiles/fil.dir/src/initialization.c.o: ../includes/filler.h
 CMakeFiles/fil.dir/src/initialization.c.o: ../libft/includes/libft.h
 CMakeFiles/fil.dir/src/initialization.c.o: ../src/initialization.c
 
+CMakeFiles/fil.dir/src/parser.c.o: ../includes/filler.h
+CMakeFiles/fil.dir/src/parser.c.o: ../libft/includes/libft.h
+CMakeFiles/fil.dir/src/parser.c.o: ../src/parser.c
+
