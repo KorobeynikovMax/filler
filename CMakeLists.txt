@@ -1,12 +1,12 @@
-cmake_minimum_required(VERSION 3.15)
-project(filller C)
+cmake_minimum_required(VERSION 3.16)
+project(fil C)
 
 set(CMAKE_C_STANDARD 11)
 
 include_directories(includes)
 include_directories(libft/includes)
 
-add_executable(filller
+add_executable(fil
         includes/filler.h
         libft/includes/libft.h
         libft/ft_atoi.c
@@ -78,4 +78,6 @@ add_executable(filller
         libft/ft_tolower.c
         libft/ft_toupper.c
         libft/ft_unsigned_itoa_base.c
-        src/filler.c src/initialization.c)
+        src/filler.c
+        src/initialization.c
+        )

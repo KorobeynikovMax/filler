@@ -44,7 +44,6 @@ int			main(void)
     if (ft_get_next_line(0, &s) && (!ft_strncmp(s, "$$$ exec p", 9)))
     {
         f.player = (s[10] == '1') ? 0 : 1;
-        printf("!!%d!!!", f.player);
         play(&f);
     }
 	return (0);
