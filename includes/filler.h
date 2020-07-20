@@ -25,6 +25,7 @@ typedef struct          s_filler
     int                 over;
     int                 map_created;
     char                **map;
+    char                **hmap;
     int                 h;
     int                 w;
 }                       t_filler;
@@ -32,5 +33,6 @@ typedef struct          s_filler
 void                    init(t_filler *f);
 void                    parse_map(t_filler *f, int height, int width);
 t_piece                 parse_piece(t_filler *f, int height, int width);
+t_point                 place(t_filler *f, t_piece p);
 
 #endif

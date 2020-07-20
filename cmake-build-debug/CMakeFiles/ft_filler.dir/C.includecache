@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../includes/filler.h
+libft.h
+../includes/libft.h
+
+../libft/includes/libft.h
+string.h
+-
+stdlib.h
+-
+unistd.h
+-
+fcntl.h
+-
+
+/Users/maxim/PROGRAMMING/C/work/ft_filler/src/filler.c
+filler.h
+/Users/maxim/PROGRAMMING/C/work/ft_filler/src/filler.h
+stdio.h
+-
+
