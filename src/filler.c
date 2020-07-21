@@ -6,7 +6,7 @@
 /*   By: bedavis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 16:20:21 by bedavis           #+#    #+#             */
-/*   Updated: 2020/07/20 18:00:22 by maxim            ###   ########lyon.fr   */
+/*   Updated: 2020/07/20 20:34:18 by maxim            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 void        put_coord(t_filler *f, t_point p)
 {
-    ft_putnbr(p.x);
-    ft_putchar(' ');
     ft_putnbr(p.y);
+    ft_putchar(' ');
+    ft_putnbr(p.x);
     ft_putchar('\n');
 }
 
@@ -50,7 +50,7 @@ void        play(t_filler *f)
             put_coord(f, place(f, parse_piece(f, ft_atoi(line), ft_atoi(ft_strchr(line, ' ')))));
         }
         if (f->over)
-            force_exit(f);
+            break;
     }
 }
 

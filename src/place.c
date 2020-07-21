@@ -3,6 +3,7 @@
 //
 
 #include "filler.h"
+#include <stdio.h>
 
 void    create_hmap(t_filler *f)
 {
@@ -24,18 +25,18 @@ int     check(t_filler *f, t_piece p, t_point pos)
     if (pos.x + p.width > f->w || pos.y + p.height > f->h)
         return (0);
     i = 0;
-    j = 0;
     cross = 0;
     while (i < p.height)
     {
+        j = 0;
         while (j < p.width)
         {
-            if (p.body[i,j] == '*')
+            if (p.body[i][j] == '*')
             {
-                if (f->map[i + pos.y, j + pos.x] == 'X' ||
-                    f->map[i + pos.y, j + pos.x] == 'x')
+                if (f->map[i + pos.y][j + pos.x] == 'X' ||
+                    f->map[i + pos.y][j + pos.x] == 'x')
                     return (0);
-                else if (f->map[i + pos.y, j + pos.x] == 'O' || f->map[i + pos.y, j + pos.x] == 'o')
+                else if (f->map[i + pos.y][j + pos.x] == 'O' || f->map[i + pos.y][j + pos.x] == 'o')
                     cross++;
             }
             j++;
@@ -48,6 +49,8 @@ int     check(t_filler *f, t_piece p, t_point pos)
 t_point place(t_filler *f, t_piece p)
 {
     t_point res;
+    int i;
+    int j;
 
     res.x = 0;
     res.y = 0;
@@ -57,15 +60,15 @@ t_point place(t_filler *f, t_piece p)
     create_hmap(f);
 
     //perebor po vsem
-    int i = 0;
-    int j = 0;
+    i = 0;
     while (i < f->h)
     {
+        j = 0;
         while (j < f->w)
         {
             res.x = j;
             res.y = i;
-            if ((f->map[i,j] == 'O' || f->map[i,j] == 'o') && check(f, p, res))
+            if ((f->map[i][j] == 'O' || f->map[i][j] == 'o') && check(f, p, res))
                 return res;
             j++;
         }
@@ -73,5 +76,6 @@ t_point place(t_filler *f, t_piece p)
     }
     res.x = 0;
     res.y = 0;
+    f->over = 1;
     return res;
 }
