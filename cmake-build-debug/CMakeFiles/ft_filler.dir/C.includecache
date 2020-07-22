@@ -20,15 +20,9 @@ unistd.h
 fcntl.h
 -
 
-/Users/maxim/PROGRAMMING/C/work/ft_filler/src/filler.c
+/Users/bedavis/Desktop/myDocs/fil/src/place.c
 filler.h
-/Users/maxim/PROGRAMMING/C/work/ft_filler/src/filler.h
-stdio.h
--
-
-/Users/maxim/PROGRAMMING/C/work/ft_filler/src/place.c
-filler.h
-/Users/maxim/PROGRAMMING/C/work/ft_filler/src/filler.h
+/Users/bedavis/Desktop/myDocs/fil/src/filler.h
 stdio.h
 -
 

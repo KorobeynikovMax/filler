@@ -46,6 +46,51 @@ int     check(t_filler *f, t_piece p, t_point pos)
     return (cross == 1 ? 1 : 0);
 }
 
+/*
+ * function notnull return 1 if position is not 0,0
+ */
+
+int notnull(t_point x)
+{
+    if (x.y == 0 && x.x == 0)
+        return 0;
+    return 1;
+}
+
+/*
+ * function perebor place the piece in all variants around the point
+ */
+
+t_point     perebor(t_filler *f, t_piece p, t_point pos)
+{
+    int start_j;
+    int start_i;
+    int fin_j;
+    int fin_i;
+    t_point result;
+
+    start_i = (pos.y - p.height + 1) >= 0 ? (pos.y - p.height + 1) : 0;
+    //start_j = (pos.x - p.width) >= 0 ? (pos.x - p.width) : 0;
+    fin_i = (pos.y + p.height) < f->h ? (pos.y) : (f->h - p.height);
+    fin_j = (pos.x + p.width) < f->w ? (pos.x) : (f->w - p.width);
+    while (start_i <= fin_i)
+    {
+        start_j = (pos.x - p.width + 1) >= 0 ? (pos.x - p.width + 1) : 0;
+        while (start_j <= fin_j)
+        {
+            result.x = start_j;
+            result.y = start_i;
+            if (check(f, p, result))
+                return result;
+            start_j++;
+        }
+        start_i++;
+    }
+    result.x = 0;
+    result.y = 0;
+    return result;
+}
+
 t_point place(t_filler *f, t_piece p)
 {
     t_point res;
@@ -68,8 +113,10 @@ t_point place(t_filler *f, t_piece p)
         {
             res.x = j;
             res.y = i;
-            if ((f->map[i][j] == 'O' || f->map[i][j] == 'o') && check(f, p, res))
-                return res;
+            /*if ((f->map[i][j] == 'O' || f->map[i][j] == 'o') && check(f, p, res))
+                return res;*/
+            if ((f->map[i][j] == 'O' || f->map[i][j] == 'o') && (notnull(perebor(f, p, res))))
+                return perebor(f, p, res);
             j++;
         }
         i++;
