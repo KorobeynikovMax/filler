@@ -21,13 +21,19 @@ typedef struct          s_piece
 typedef struct          s_filler
 {
     t_point             coord;
-    int                 player;
     int                 over;
     int                 map_created;
     char                **map;
     char                **hmap;
     int                 h;
     int                 w;
+    char                my;
+    char                my_small;
+    char                en;
+    char                en_small;
+    /* koeficents main loop */
+    int                 k_i;
+    int                 k_j;
 }                       t_filler;
 
 void                    init(t_filler *f);

@@ -65,7 +65,20 @@ int			main(void)
     init(&f);
     if (ft_get_next_line(0, &s) && (!ft_strncmp(s, "$$$ exec p", 9)))
     {
-        f.player = (s[10] == '1') ? 0 : 1;
+        if (s[10] == '1')
+        {
+            f.my = 'O';
+            f.my_small = 'o';
+            f.en = 'X';
+            f.en_small = 'x';
+        }
+        else
+        {
+            f.my = 'X';
+            f.my_small = 'x';
+            f.en = 'O';
+            f.en_small = 'o';
+        }
         play(&f);
     }
 	return (0);

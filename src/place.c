@@ -33,10 +33,10 @@ int     check(t_filler *f, t_piece p, t_point pos)
         {
             if (p.body[i][j] == '*')
             {
-                if (f->map[i + pos.y][j + pos.x] == 'X' ||
-                    f->map[i + pos.y][j + pos.x] == 'x')
+                if (f->map[i + pos.y][j + pos.x] == f->en ||
+                    f->map[i + pos.y][j + pos.x] == f->en_small)
                     return (0);
-                else if (f->map[i + pos.y][j + pos.x] == 'O' || f->map[i + pos.y][j + pos.x] == 'o')
+                else if (f->map[i + pos.y][j + pos.x] == f->my || f->map[i + pos.y][j + pos.x] == f->my_small)
                     cross++;
             }
             j++;
@@ -91,11 +91,39 @@ t_point     perebor(t_filler *f, t_piece p, t_point pos)
     return result;
 }
 
+void    make_koef(t_filler *f)
+{
+    int i;
+    int j;
+    int i_O;
+    int j_O;
+
+    i = 0;
+    while (i < f->h)
+    {
+        j = 0;
+        while (j < f->w)
+        {
+            if (f->map[i][j] == f->my)
+            {
+                i_O = i;
+                j_O = j;
+            }
+            j++;
+        }
+        i++;
+    }
+    f->k_i = (i_O < f->h / 2) ? -1 : 1;
+    f->k_j = (j_O < f->w / 2) ? -1 : 1;
+}
+
 t_point place(t_filler *f, t_piece p)
 {
     t_point res;
     int i;
     int j;
+    t_point start;
+    t_point end;
 
     res.x = 0;
     res.y = 0;
@@ -104,22 +132,27 @@ t_point place(t_filler *f, t_piece p)
     //create heatmap
     create_hmap(f);
 
+    make_koef(f);
+    start.x = (f->k_j > 0) ? 0 : f->w - 1;
+    start.y = (f->k_i > 0) ? 0 : f->h - 1;
+    end.x = (f->k_j > 0) ? f->w - 1 : 0;
+    end.y = (f->k_i > 0) ? f->h - 1 : 0;
     //perebor po vsem
-    i = 0;
-    while (i < f->h)
+    i = start.y;
+    while (i != end.y)
     {
-        j = 0;
-        while (j < f->w)
+        j = start.x;
+        while (j != end.x)
         {
             res.x = j;
             res.y = i;
             /*if ((f->map[i][j] == 'O' || f->map[i][j] == 'o') && check(f, p, res))
                 return res;*/
-            if ((f->map[i][j] == 'O' || f->map[i][j] == 'o') && (notnull(perebor(f, p, res))))
+            if ((f->map[i][j] == f->my || f->map[i][j] == f->my_small) && (notnull(perebor(f, p, res))))
                 return perebor(f, p, res);
-            j++;
+            j += f->k_j;
         }
-        i++;
+        i += f->k_i;
     }
     res.x = 0;
     res.y = 0;
