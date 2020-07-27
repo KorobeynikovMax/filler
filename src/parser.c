@@ -32,6 +32,31 @@ t_piece    parse_piece(t_filler *f, int height, int width)
     return p;
 }
 
+void    make_koef(t_filler *f)
+{
+    int i;
+    int j;
+    int i_O;
+    int j_O;
+
+    i = 0;
+    while (i < f->h)
+    {
+        j = 0;
+        while (j < f->w)
+        {
+            if (f->map[i][j] == f->my)
+            {
+                i_O = i;
+                j_O = j;
+            }
+            j++;
+        }
+        i++;
+    }
+    f->k_i = (i_O < f->h / 2) ? -1 : 1;
+    f->k_j = (j_O < f->w / 2) ? -1 : 1;
+}
 
 void        create_map(t_filler *f, int height, int width)
 {
@@ -50,6 +75,7 @@ void        create_map(t_filler *f, int height, int width)
         f->map[i] = line + 4; //сдвиг для координат
         i++;
     }
+    make_koef(f);
 }
 
 void        parse_map(t_filler *f, height, width)

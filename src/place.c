@@ -67,54 +67,43 @@ t_point     perebor(t_filler *f, t_piece p, t_point pos)
     int start_i;
     int fin_j;
     int fin_i;
+    int b;
     t_point result;
 
     start_i = (pos.y - p.height + 1) >= 0 ? (pos.y - p.height + 1) : 0;
-    //start_j = (pos.x - p.width) >= 0 ? (pos.x - p.width) : 0;
+    //start_j = (pos.x - p.width + 1) >= 0 ? (pos.x - p.width + 1) : 0;
     fin_i = (pos.y + p.height) < f->h ? (pos.y) : (f->h - p.height);
     fin_j = (pos.x + p.width) < f->w ? (pos.x) : (f->w - p.width);
-    while (start_i <= fin_i)
+    if (f->k_i < 0)
+    {
+        b = start_i;
+        start_i = fin_i;
+        fin_i = b;
+    }
+    //while (start_i <= fin_i)
+    while (start_i != (fin_i + f->k_i))
     {
         start_j = (pos.x - p.width + 1) >= 0 ? (pos.x - p.width + 1) : 0;
-        while (start_j <= fin_j)
+        if (f->k_j < 0)
+        {
+            b = start_j;
+            start_j = fin_j;
+            fin_j = b;
+        }
+        //while (start_j <= fin_j)
+        while (start_j != (fin_j + f->k_j))
         {
             result.x = start_j;
             result.y = start_i;
             if (check(f, p, result))
                 return result;
-            start_j++;
+            start_j += f->k_j;
         }
-        start_i++;
+        start_i += f->k_i;
     }
     result.x = 0;
     result.y = 0;
     return result;
-}
-
-void    make_koef(t_filler *f)
-{
-    int i;
-    int j;
-    int i_O;
-    int j_O;
-
-    i = 0;
-    while (i < f->h)
-    {
-        j = 0;
-        while (j < f->w)
-        {
-            if (f->map[i][j] == f->my)
-            {
-                i_O = i;
-                j_O = j;
-            }
-            j++;
-        }
-        i++;
-    }
-    f->k_i = (i_O < f->h / 2) ? -1 : 1;
-    f->k_j = (j_O < f->w / 2) ? -1 : 1;
 }
 
 t_point place(t_filler *f, t_piece p)
@@ -132,7 +121,6 @@ t_point place(t_filler *f, t_piece p)
     //create heatmap
     create_hmap(f);
 
-    make_koef(f);
     start.x = (f->k_j > 0) ? 0 : f->w - 1;
     start.y = (f->k_i > 0) ? 0 : f->h - 1;
     end.x = (f->k_j > 0) ? f->w - 1 : 0;
