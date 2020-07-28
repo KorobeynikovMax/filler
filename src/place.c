@@ -7,6 +7,11 @@
 
 void    create_hmap(t_filler *f)
 {
+    
+}
+
+void    make_hmap(t_filler *f)
+{
 
 }
 
@@ -119,7 +124,7 @@ t_point place(t_filler *f, t_piece p)
     //tut algoritm
 
     //create heatmap
-    create_hmap(f);
+    make_hmap(f);
 
     start.x = (f->k_j > 0) ? 0 : f->w - 1;
     start.y = (f->k_i > 0) ? 0 : f->h - 1;

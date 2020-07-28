@@ -6,7 +6,7 @@
 /*   By: bedavis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:14 by bedavis           #+#    #+#             */
-/*   Updated: 2020/07/18 13:47:16 by bedavis          ###   ########.fr       */
+/*   Updated: 2020/07/27 16:44:46 by maxim            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 #include "filler.h"
@@ -76,6 +76,7 @@ void        create_map(t_filler *f, int height, int width)
         i++;
     }
     make_koef(f);
+    create_hmap(f);
 }
 
 void        parse_map(t_filler *f, height, width)
