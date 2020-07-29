@@ -298,6 +298,9 @@
 		<Unit filename="/Users/bedavis/Desktop/myDocs/fil/src/filler.c">
 			<Option target="fil"/>
 		</Unit>
+		<Unit filename="/Users/bedavis/Desktop/myDocs/fil/src/hmap.c">
+			<Option target="fil"/>
+		</Unit>
 		<Unit filename="/Users/bedavis/Desktop/myDocs/fil/src/initialization.c">
 			<Option target="fil"/>
 		</Unit>

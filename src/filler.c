@@ -46,7 +46,6 @@ void        play(t_filler *f)
         else if (!ft_strncmp(line, "Piece ", 5))
         {
             line = &line[6];
-            ;
             put_coord(f, place(f, parse_piece(f, ft_atoi(line), ft_atoi(ft_strchr(line, ' ')))));
         }
         if (f->over)

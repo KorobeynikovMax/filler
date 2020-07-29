@@ -41,5 +41,8 @@ void                    parse_map(t_filler *f, int height, int width);
 t_piece                 parse_piece(t_filler *f, int height, int width);
 t_point                 place(t_filler *f, t_piece p);
 void                    create_hmap(t_filler *f);
+void                    make_hmap(t_filler *f);
+void                    fill_hmap(t_filler *f);
+
 
 #endif

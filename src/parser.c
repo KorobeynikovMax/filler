@@ -75,8 +75,9 @@ void        create_map(t_filler *f, int height, int width)
         f->map[i] = line + 4; //сдвиг для координат
         i++;
     }
-    make_koef(f);
+    //make_koef(f);
     create_hmap(f);
+    fill_hmap(f);
 }
 
 void        parse_map(t_filler *f, height, width)
@@ -94,12 +95,13 @@ void        parse_map(t_filler *f, height, width)
     if (!f->map_created)
         create_map(f, height, width);
     else
-        while (i < height)
         {
+        while (i < height) {
             ft_get_next_line(0, &line);
             f->map[i] = line + 4; //сдвиг для координат
             i++;
         }
-
+        fill_hmap(f);
+    }
     //write freeer map
 }

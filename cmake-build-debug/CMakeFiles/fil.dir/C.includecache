@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../includes/filler.h
+libft.h
+../includes/libft.h
+
+../libft/includes/libft.h
+string.h
+-
+stdlib.h
+-
+unistd.h
+-
+fcntl.h
+-
+
+/Users/bedavis/Desktop/myDocs/fil/src/hmap.c
+filler.h
+/Users/bedavis/Desktop/myDocs/fil/src/filler.h
+stdio.h
+-
+
