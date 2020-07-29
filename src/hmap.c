@@ -22,6 +22,19 @@ void    hput_init(int y, t_filler *f)
     }
 }
 
+void    create_hmap_0(t_filler *f)
+{
+    int y;
+
+    y = 0;
+    while (y < f->h)
+    {
+        hput_init(y, f);
+        y++;
+    }
+    make_hmap(f);
+}
+
 void    create_hmap(t_filler *f)
 {
     int x;
@@ -35,10 +48,9 @@ void    create_hmap(t_filler *f)
     {
         if (!(f->hmap[y] = (int *)malloc(sizeof(int) * (unsigned long)f->w)))
             printf("Error w!");
-        hput_init(y, f);
         y++;
     }
-    make_hmap(f);
+    create_hmap_0(f);
 }
 
 void    make_hmap_1(t_filler *f, int x, int y)
@@ -71,6 +83,7 @@ void    make_hmap(t_filler *f)
         }
         y++;
     }
+    fill_hmap(f);
 }
 
 void    hmap_put(int i, int x, int y, t_filler *f)

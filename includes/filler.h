@@ -43,6 +43,7 @@ t_point                 place(t_filler *f, t_piece p);
 void                    create_hmap(t_filler *f);
 void                    make_hmap(t_filler *f);
 void                    fill_hmap(t_filler *f);
+void                    create_hmap_0(t_filler *f);
 
 
 #endif

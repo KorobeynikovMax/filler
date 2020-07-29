@@ -77,7 +77,6 @@ void        create_map(t_filler *f, int height, int width)
     }
     //make_koef(f);
     create_hmap(f);
-    fill_hmap(f);
 }
 
 void        parse_map(t_filler *f, height, width)
@@ -101,7 +100,7 @@ void        parse_map(t_filler *f, height, width)
             f->map[i] = line + 4; //сдвиг для координат
             i++;
         }
-        fill_hmap(f);
+        create_hmap_0(f);
     }
     //write freeer map
 }

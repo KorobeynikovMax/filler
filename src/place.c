@@ -83,11 +83,11 @@ t_point place(t_filler *f, t_piece p)
 
     res.x = 0;
     res.y = 0;
-    min = 1000;
+    min = 1000000000;
     i = 0;
     while (i <= f->h - p.height)
     {
-        j = 0;
+        j = (i == 0) ? 1 : 0;
         while (j <= f->w - p.width)
         {
             if (check(f, p, i, j) && get_sum(f, p, i, j) < min)
