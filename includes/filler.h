@@ -3,7 +3,7 @@
 
 # include "libft.h"
 
-# define BUF_SIZE		64
+# define MYMAX_INT		2147483647
 
 typedef struct          s_point
 {

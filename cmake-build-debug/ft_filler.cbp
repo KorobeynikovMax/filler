@@ -298,6 +298,9 @@
 		<Unit filename="/Users/maxim/PROGRAMMING/C/work/ft_filler/src/filler.c">
 			<Option target="ft_filler"/>
 		</Unit>
+		<Unit filename="/Users/maxim/PROGRAMMING/C/work/ft_filler/src/hmap.c">
+			<Option target="ft_filler"/>
+		</Unit>
 		<Unit filename="/Users/maxim/PROGRAMMING/C/work/ft_filler/src/initialization.c">
 			<Option target="ft_filler"/>
 		</Unit>

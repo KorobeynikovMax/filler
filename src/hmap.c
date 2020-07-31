@@ -125,7 +125,7 @@ void    fill_hmap(t_filler *f)
     int	i;
 
     i = 1;
-    while (i < f->w + f->h)
+    while (i < (f->w * f->h))
     {
         y = 0;
         while (y < f->h)

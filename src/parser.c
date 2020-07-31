@@ -6,7 +6,7 @@
 /*   By: bedavis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:14 by bedavis           #+#    #+#             */
-/*   Updated: 2020/07/27 16:44:46 by maxim            ###   ########lyon.fr   */
+/*   Updated: 2020/08/01 00:37:40 by maxim            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 #include "filler.h"
@@ -75,7 +75,7 @@ void        create_map(t_filler *f, int height, int width)
         f->map[i] = line + 4; //сдвиг для координат
         i++;
     }
-    //make_koef(f);
+    make_koef(f);
     create_hmap(f);
 }
 
@@ -95,12 +95,13 @@ void        parse_map(t_filler *f, height, width)
         create_map(f, height, width);
     else
         {
-        while (i < height) {
-            ft_get_next_line(0, &line);
-            f->map[i] = line + 4; //сдвиг для координат
-            i++;
+            while (i < height)
+            {
+                ft_get_next_line(0, &line);
+                f->map[i] = line + 4; //сдвиг для координат
+                i++;
+            }
+            create_hmap_0(f);
         }
-        create_hmap_0(f);
-    }
     //write freeer map
 }

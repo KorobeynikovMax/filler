@@ -83,7 +83,7 @@ t_point place(t_filler *f, t_piece p)
 
     res.x = 0;
     res.y = 0;
-    min = 1000000000;
+    min = MYMAX_INT;
     i = 0;
     while (i <= f->h - p.height)
     {
