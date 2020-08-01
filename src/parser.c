@@ -39,7 +39,7 @@ t_piece    parse_piece(t_filler *f, int height, int width)
 ** Creating the map first time, 4 is the offset for coordinates
 */
 
-void        create_map(t_filler *f, int height, int width)
+int       create_map(t_filler *f, int height, int width)
 {
     int i;
     char *line;
@@ -49,21 +49,23 @@ void        create_map(t_filler *f, int height, int width)
     f->w = width;
     f->map_created = 1;
 
-    f->map = ft_memalloc(height * sizeof(char *));
+    if (!(f->map = ft_memalloc(height * sizeof(char *))))
+        return (1);
     while (i < height)
     {
         ft_get_next_line(0, &line);
         f->map[i] = line + 4;
+        //ft_strdel(&line);
         i++;
     }
-    create_hmap(f);
+    return (create_hmap(f));
 }
 
 /*
 ** Map parsing, 4 is the offset for coordinates
 */
 
-void        parse_map(t_filler *f, height, width)
+int        parse_map(t_filler *f, height, width)
 {
     char *line;
     int i;
@@ -71,7 +73,10 @@ void        parse_map(t_filler *f, height, width)
     i = 0;
     ft_get_next_line(0, &line);
     if (!f->map_created)
-        create_map(f, height, width);
+    {
+        if (create_map(f, height, width))
+            return (1);
+    }
     else
         {
             while (i < height)
@@ -83,4 +88,5 @@ void        parse_map(t_filler *f, height, width)
             create_hmap_0(f);
         }
     //write freeer map
+    return (0);
 }

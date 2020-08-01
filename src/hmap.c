@@ -1,9 +1,16 @@
-//
-// Created by Benjen Davis on 7/29/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hmap.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bedavis <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/01 15:56:47 by bedavis           #+#    #+#             */
+/*   Updated: 2020/08/01 15:56:55 by bedavis          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "filler.h"
-#include <stdio.h>
 
 /*
 ** Function fills hmap very first time
@@ -47,21 +54,22 @@ void    create_hmap_0(t_filler *f)
 ** Function allocate memmory for heat map and starts first filling with 0
 */
 
-void    create_hmap(t_filler *f)
+int    create_hmap(t_filler *f)
 {
     int y;
 
     y = 0;
     if (!(f->hmap = (int **)malloc(sizeof(int *) * (unsigned long)f->h)))
-        printf("Error h!");
+        return (1);
     while (y < f->h)
     {
         if (!(f->hmap[y] =
                 (int *)malloc(sizeof(int) * (unsigned long)f->w)))
-            printf("Error w!");
+            return (1);
         y++;
     }
     create_hmap_0(f);
+    return (0);
 }
 
 /*

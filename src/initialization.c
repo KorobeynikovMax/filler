@@ -32,3 +32,16 @@ int     isnull(t_point x)
         return (1);
     return (0);
 }
+
+void    free_map(t_filler *f)
+{
+    int i;
+
+    i = 0;
+    while (i < f->h && (f->hmap))
+        free(f->hmap[i++]);
+    free(f->map);
+    free(f->hmap);
+    f->map = NULL;
+    f->hmap = NULL;
+}

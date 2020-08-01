@@ -31,22 +31,27 @@ void        put_coord(t_filler *f, t_point p)
 void        play(t_filler *f)
 {
     char    *line;
+    char    *str;
 
     while ((ft_get_next_line(0, &line)) > -1 && !f->over)
     {
+        str = line;
         if (!ft_strncmp(line, "Plateau ", 7))
         {
             line = &line[8];
-            parse_map(f, ft_atoi(line), ft_atoi(ft_strchr(line, ' ')));
+            if (parse_map(f, ft_atoi(line), ft_atoi(ft_strchr(line, ' '))))
+                break;
         }
         else if (!ft_strncmp(line, "Piece ", 5))
         {
             line = &line[6];
             put_coord(f, place(f,parse_piece(f, ft_atoi(line), ft_atoi(ft_strchr(line, ' ')))));
         }
+        free(str);
         if (f->over)
             break;
     }
+    free_map(f);
 }
 
 /*
@@ -75,5 +80,6 @@ int			main(void)
         }
         play(&f);
     }
+    free(s);
 	return (0);
 }

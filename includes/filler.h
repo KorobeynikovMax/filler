@@ -34,12 +34,13 @@ typedef struct          s_filler
 
 void                    init(t_filler *f);
 int                     isnull(t_point x);
-void                    parse_map(t_filler *f, int height, int width);
+int                     parse_map(t_filler *f, int height, int width);
 t_piece                 parse_piece(t_filler *f, int height, int width);
 t_point                 place(t_filler *f, t_piece p);
-void                    create_hmap(t_filler *f);
+int                    create_hmap(t_filler *f);
 void                    make_hmap(t_filler *f);
 void                    fill_hmap(t_filler *f);
 void                    create_hmap_0(t_filler *f);
+void                    free_map(t_filler *f);
 
 #endif

@@ -105,5 +105,6 @@ t_point place(t_filler *f, t_piece p)
         i++;
     }
     f->over = isnull(res);
+    free(p.body);
     return (res);
 }
