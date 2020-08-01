@@ -1,13 +1,20 @@
-//
-// Created by Макс Коробейников on 20/07/2020.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   place.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bedavis <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/01 14:01:43 by bedavis           #+#    #+#             */
+/*   Updated: 2020/08/01 14:01:47 by bedavis          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "filler.h"
-#include <stdio.h>
 
 /*
- * function checks if the piece is valid for this position
- */
+** Function checks if the piece is valid for this position
+*/
 
 int     check(t_filler *f, t_piece p, int y, int x)
 {
@@ -40,15 +47,8 @@ int     check(t_filler *f, t_piece p, int y, int x)
 }
 
 /*
- * function notnull return 1 if position is not 0,0
- */
-
-int isnull(t_point x)
-{
-    if (x.y == 0 && x.x == 0)
-        return 1;
-    return 0;
-}
+** Counting the sum of heat weights for this piece
+*/
 
 int     get_sum(t_filler *f, t_piece p, int y, int x)
 {
@@ -73,6 +73,10 @@ int     get_sum(t_filler *f, t_piece p, int y, int x)
     }
     return (res);
 }
+
+/*
+** Function returns the t_point with final decision
+*/
 
 t_point place(t_filler *f, t_piece p)
 {
@@ -101,5 +105,5 @@ t_point place(t_filler *f, t_piece p)
         i++;
     }
     f->over = isnull(res);
-    return res;
+    return (res);
 }

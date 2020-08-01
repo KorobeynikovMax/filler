@@ -5,6 +5,10 @@
 #include "filler.h"
 #include <stdio.h>
 
+/*
+** Function fills hmap very first time
+*/
+
 void    hput_init(int y, t_filler *f)
 {
     int x;
@@ -22,6 +26,10 @@ void    hput_init(int y, t_filler *f)
     }
 }
 
+/*
+** Function fills hmap very first time
+*/
+
 void    create_hmap_0(t_filler *f)
 {
     int y;
@@ -35,23 +43,30 @@ void    create_hmap_0(t_filler *f)
     make_hmap(f);
 }
 
+/*
+** Function allocate memmory for heat map and starts first filling with 0
+*/
+
 void    create_hmap(t_filler *f)
 {
-    int x;
     int y;
 
-    x = 0;
     y = 0;
     if (!(f->hmap = (int **)malloc(sizeof(int *) * (unsigned long)f->h)))
         printf("Error h!");
     while (y < f->h)
     {
-        if (!(f->hmap[y] = (int *)malloc(sizeof(int) * (unsigned long)f->w)))
+        if (!(f->hmap[y] =
+                (int *)malloc(sizeof(int) * (unsigned long)f->w)))
             printf("Error w!");
         y++;
     }
     create_hmap_0(f);
 }
+
+/*
+** Function check the neighbours of x,y if they are enemy
+*/
 
 void    make_hmap_1(t_filler *f, int x, int y)
 {
@@ -65,6 +80,10 @@ void    make_hmap_1(t_filler *f, int x, int y)
         (x + 1 < f->w && y + 1 < f->h && f->hmap[y + 1][x + 1] == -1))
         f->hmap[y][x] = 1;
 }
+
+/*
+** Function fill the hmap with first '1's
+*/
 
 void    make_hmap(t_filler *f)
 {
@@ -84,62 +103,4 @@ void    make_hmap(t_filler *f)
         y++;
     }
     fill_hmap(f);
-}
-
-void    hmap_put(int i, int x, int y, t_filler *f)
-{
-    if ((x - 1 >= 0 && y - 1 >= 0 && f->hmap[y - 1][x - 1] == i) ||
-        (y - 1 >= 0 && f->hmap[y - 1][x] == i) ||
-        (x + 1 < f->w && y - 1 >= 0 && f->hmap[y - 1][x + 1] == i) ||
-        (x - 1 >= 0 && f->hmap[y][x - 1] == i) ||
-        (x + 1 < f->w && f->hmap[y][x + 1] == i) ||
-        (x - 1 >= 0 && y + 1 < f->h && f->hmap[y + 1][x - 1] == i) ||
-        (y + 1 < f->h && f->hmap[y + 1][x] == i) ||
-        (x + 1 < f->w && y + 1 < f->h && f->hmap[y + 1][x + 1] == i))
-        f->hmap[y][x] = i + 1;
-}
-
-void    fight_zeros(t_filler *f, int i)
-{
-    int y;
-    int x;
-
-    y = 0;
-    while (y < f->h)
-    {
-        x = 0;
-        while (x < f->w)
-        {
-            if (f->hmap[y][x] == 0)
-                f->hmap[y][x] = i + 1;
-            x++;
-        }
-        y++;
-    }
-}
-
-void    fill_hmap(t_filler *f)
-{
-    int	x;
-    int	y;
-    int	i;
-
-    i = 1;
-    while (i < (f->w * f->h))
-    {
-        y = 0;
-        while (y < f->h)
-        {
-            x = 0;
-            while (x < f->w)
-            {
-                if (f->hmap[y][x] == 0)
-                    hmap_put(i, x, y, f);
-                x++;
-            }
-            y++;
-        }
-        i++;
-    }
-    fight_zeros(f, i);
 }

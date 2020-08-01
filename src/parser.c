@@ -9,16 +9,19 @@
 /*   Updated: 2020/08/01 00:37:40 by maxim            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "filler.h"
-#include <stdio.h>
+
+/*
+** Parsing the token
+*/
 
 t_piece    parse_piece(t_filler *f, int height, int width)
 {
     int i;
     char *line;
-
-    i = 0;
     t_piece p;
+
     p.width = width;
     p.height = height;
     p.body = ft_memalloc(height * sizeof(char *));
@@ -32,31 +35,9 @@ t_piece    parse_piece(t_filler *f, int height, int width)
     return p;
 }
 
-void    make_koef(t_filler *f)
-{
-    int i;
-    int j;
-    int i_O;
-    int j_O;
-
-    i = 0;
-    while (i < f->h)
-    {
-        j = 0;
-        while (j < f->w)
-        {
-            if (f->map[i][j] == f->my)
-            {
-                i_O = i;
-                j_O = j;
-            }
-            j++;
-        }
-        i++;
-    }
-    f->k_i = (i_O < f->h / 2) ? -1 : 1;
-    f->k_j = (j_O < f->w / 2) ? -1 : 1;
-}
+/*
+** Creating the map first time, 4 is the offset for coordinates
+*/
 
 void        create_map(t_filler *f, int height, int width)
 {
@@ -72,25 +53,23 @@ void        create_map(t_filler *f, int height, int width)
     while (i < height)
     {
         ft_get_next_line(0, &line);
-        f->map[i] = line + 4; //сдвиг для координат
+        f->map[i] = line + 4;
         i++;
     }
-    make_koef(f);
     create_hmap(f);
 }
 
+/*
+** Map parsing, 4 is the offset for coordinates
+*/
+
 void        parse_map(t_filler *f, height, width)
 {
-    int res;
     char *line;
     int i;
-    int j;
 
     i = 0;
-    j = 0;
-    res = ft_get_next_line(0, &line);
-    //over here is working
-
+    ft_get_next_line(0, &line);
     if (!f->map_created)
         create_map(f, height, width);
     else
@@ -98,7 +77,7 @@ void        parse_map(t_filler *f, height, width)
             while (i < height)
             {
                 ft_get_next_line(0, &line);
-                f->map[i] = line + 4; //сдвиг для координат
+                f->map[i] = line + 4;
                 i++;
             }
             create_hmap_0(f);

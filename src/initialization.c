@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxim <maxim@student.le-101.fr>            +#+  +:+       +#+        */
+/*   By: bedavis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 19:58:16 by maxim             #+#    #+#             */
 /*   Updated: 2020/07/27 01:08:58 by maxim            ###   ########lyon.fr   */
@@ -12,13 +12,23 @@
 
 #include "filler.h"
 
-void init(t_filler *f)
+/*
+** Initializer
+*/
+
+void    init(t_filler *f)
 {
     f->over = 0;
     f->map_created = 0;
-    f->coord.x = 2;
-    f->coord.y = 2;
+}
 
-    f->k_i = 1;
-    f->k_j = 1;
+/*
+** function notnull return 1 if position is not 0,0
+*/
+
+int     isnull(t_point x)
+{
+    if (x.y == 0 && x.x == 0)
+        return (1);
+    return (0);
 }

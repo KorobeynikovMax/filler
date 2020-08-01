@@ -11,7 +11,10 @@
 /* ************************************************************************** */
 
 #include "filler.h"
-#include <stdio.h>
+
+/*
+** The only one print function
+*/
 
 void        put_coord(t_filler *f, t_point p)
 {
@@ -21,20 +24,13 @@ void        put_coord(t_filler *f, t_point p)
     ft_putchar('\n');
 }
 
-void        force_exit(t_filler *f)
-{
-    t_point p;
-
-    p.x = 0;
-    p.y = 0;
-    f->over = 1;
-    put_coord(f, p);
-}
+/*
+** Main loop function
+*/
 
 void        play(t_filler *f)
 {
     char    *line;
-    int     res = 1;
 
     while ((ft_get_next_line(0, &line)) > -1 && !f->over)
     {
@@ -46,37 +42,36 @@ void        play(t_filler *f)
         else if (!ft_strncmp(line, "Piece ", 5))
         {
             line = &line[6];
-            put_coord(f, place(f, parse_piece(f, ft_atoi(line), ft_atoi(ft_strchr(line, ' ')))));
+            put_coord(f, place(f,parse_piece(f, ft_atoi(line), ft_atoi(ft_strchr(line, ' ')))));
         }
         if (f->over)
             break;
     }
 }
 
+/*
+** Main, start point, check the x or o
+*/
+
 int			main(void)
 {
     char *s;
-    int i = 0;
-    int res;
     t_filler f;
 
     ft_bzero(&f, sizeof(t_filler));
     init(&f);
     if (ft_get_next_line(0, &s) && (!ft_strncmp(s, "$$$ exec p", 9)))
     {
+        f.my = 'X';
+        f.my_small = 'x';
+        f.en = 'O';
+        f.en_small = 'o';
         if (s[10] == '1')
         {
             f.my = 'O';
             f.my_small = 'o';
             f.en = 'X';
             f.en_small = 'x';
-        }
-        else
-        {
-            f.my = 'X';
-            f.my_small = 'x';
-            f.en = 'O';
-            f.en_small = 'o';
         }
         play(&f);
     }
