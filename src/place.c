@@ -6,7 +6,7 @@
 /*   By: bedavis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 14:01:43 by bedavis           #+#    #+#             */
-/*   Updated: 2020/08/01 14:01:47 by bedavis          ###   ########.fr       */
+/*   Updated: 2020/08/03 01:27:36 by maxim            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,24 @@ int     get_sum(t_filler *f, t_piece p, int y, int x)
     return (res);
 }
 
+
+void free_piece(t_piece *p)
+{
+    int		i;
+    char	*str;
+
+    if (!p->body)
+        return ;
+    i = 0;
+    while (i < p->height)
+    {
+        str = p->body[i];
+        ft_strdel(&str);
+        i++;
+    }
+    ft_memdel((void **)&p->body);
+}
+
 /*
 ** Function returns the t_point with final decision
 */
@@ -105,6 +123,6 @@ t_point place(t_filler *f, t_piece p)
         i++;
     }
     f->over = isnull(res);
-    free(p.body);
+    free_piece(&p);
     return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: bedavis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:14 by bedavis           #+#    #+#             */
-/*   Updated: 2020/08/01 00:37:40 by maxim            ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 02:05:42 by maxim            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ t_piece    parse_piece(t_filler *f, int height, int width)
 
     p.width = width;
     p.height = height;
-    p.body = ft_memalloc(height * sizeof(char *));
+    if (!(p.body = ft_memalloc(height * sizeof(char *))))
+    {
+        f->over = 1;
+        return (p);
+    }
     i = 0;
     while (i < height)
     {
@@ -65,13 +69,14 @@ int       create_map(t_filler *f, int height, int width)
 ** Map parsing, 4 is the offset for coordinates
 */
 
-int        parse_map(t_filler *f, height, width)
+int        parse_map(t_filler *f, int height, int width)
 {
     char *line;
     int i;
 
     i = 0;
     ft_get_next_line(0, &line);
+    free(line);
     if (!f->map_created)
     {
         if (create_map(f, height, width))

@@ -6,7 +6,7 @@
 /*   By: bedavis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 19:58:16 by maxim             #+#    #+#             */
-/*   Updated: 2020/07/27 01:08:58 by maxim            ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 01:15:12 by maxim            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,23 @@ int     isnull(t_point x)
     return (0);
 }
 
+void    free_map2(t_filler *f)
+{
+    int		i;
+    char	*str;
+
+    if (!f->map)
+        return ;
+    i = 0;
+    while (i < f->h)
+    {
+        str = f->map[i] - 4;
+        ft_strdel(&str);
+        i++;
+    }
+    ft_memdel((void **)&f->map);
+}
+
 void    free_map(t_filler *f)
 {
     int i;
@@ -40,8 +57,9 @@ void    free_map(t_filler *f)
     i = 0;
     while (i < f->h && (f->hmap))
         free(f->hmap[i++]);
-    free(f->map);
+    //free(f->map);
     free(f->hmap);
-    f->map = NULL;
+    //f->map = NULL;
     f->hmap = NULL;
+    free_map2(f);
 }
