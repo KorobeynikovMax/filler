@@ -20,7 +20,7 @@ unistd.h
 fcntl.h
 -
 
-/Users/maxim/PROGRAMMING/C/work/ft_filler/src/parser.c
+/Users/maxim/PROGRAMMING/C/work/ft_filler/src/initialization.c
 filler.h
 /Users/maxim/PROGRAMMING/C/work/ft_filler/src/filler.h
 

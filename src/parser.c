@@ -6,7 +6,7 @@
 /*   By: bedavis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:14 by bedavis           #+#    #+#             */
-/*   Updated: 2020/08/03 02:05:42 by maxim            ###   ########lyon.fr   */
+/*   Updated: 2020/08/03 04:04:18 by maxim            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,16 @@ int       create_map(t_filler *f, int height, int width)
     f->w = width;
     f->map_created = 1;
 
-    if (!(f->map = ft_memalloc(height * sizeof(char *))))
+    if (!(f->map = (char **)ft_memalloc(height * sizeof(char *))))
         return (1);
     while (i < height)
     {
+        if (!(f->map[i] = (char *)ft_memalloc((width + 1) * sizeof(char))))
+            return (1);
         ft_get_next_line(0, &line);
-        f->map[i] = line + 4;
-        //ft_strdel(&line);
+        //f->map[i] = line + 4;
+        ft_strcpy(f->map[i], line + 4);
+        ft_strdel(&line);
         i++;
     }
     return (create_hmap(f));
@@ -87,7 +90,9 @@ int        parse_map(t_filler *f, int height, int width)
             while (i < height)
             {
                 ft_get_next_line(0, &line);
-                f->map[i] = line + 4;
+                //f->map[i] = line + 4;
+                ft_strcpy(f->map[i], line + 4);
+                ft_strdel(&line);
                 i++;
             }
             create_hmap_0(f);
