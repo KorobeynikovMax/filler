@@ -6,7 +6,7 @@
 /*   By: bedavis <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 15:38:31 by bedavis           #+#    #+#             */
-/*   Updated: 2020/08/03 15:46:09 by bedavis          ###   ########.fr       */
+/*   Updated: 2020/08/03 16:49:31 by bedavis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** The only one print function
 */
 
-void			put_coord(t_filler *f, t_point p)
+void			put_coord(t_point p)
 {
 	ft_putnbr(p.y);
 	ft_putchar(' ');
@@ -45,7 +45,7 @@ void			play(t_filler *f)
 		else if (!ft_strncmp(line, "Piece ", 5))
 		{
 			line = &line[6];
-			put_coord(f, place(f, parse_piece(f, ft_atoi(line),
+			put_coord(place(f, parse_piece(f, ft_atoi(line),
 							ft_atoi(ft_strchr(line, ' ')))));
 		}
 		free(str);

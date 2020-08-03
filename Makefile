@@ -3,95 +3,65 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wanton <wanton@student.42.fr>              +#+  +:+       +#+         #
+#    By: bedavis <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/03/09 14:07:05 by wanton            #+#    #+#              #
-#    Updated: 2020/03/11 14:58:45 by wanton           ###   ########.fr        #
+#    Created: 2020/08/03 16:40:31 by bedavis           #+#    #+#              #
+#    Updated: 2020/08/03 17:11:01 by bedavis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME = bedavis.filler
 
-#Source files
-SOURCES =	ft_printf.c \
-			parser.c \
-			s_flag.c \
-			d_flag.c \
-			c_flag.c \
-			pr_flag.c \
-			p_flag.c \
-			f_flag.c \
-			d_flag_assist.c \
-			help_functions.c \
-			init_functions.c \
-			f_flag_func.c
-
-#Compiler
-CC = gcc
-FLAGS = -Wall -Wextra -Werror
-
-#Ft library
-LIBFT = libft
-LIBFT_DIRECTORY = ./libft/
-LIB_HEADER = $(LIBFT_DIRECTORY)includes/
-LIBFT_LINK = -L $(LIBFT_DIRECTORY) -l ft
-
-#Directories
-DIR_S = ./src/
-DIR_O = ./obj/
-HEADER = ./includes/
-
-#Source
-SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
-
-#Object files
-OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
-
-INCLUDES = -I $(HEADER) -I $(LIB_HEADER)
+SRC_PATH = ./src/
+LIB_PATH = ./libft/
+OBJ_PATH = ./obj/
+LIB_HEADER = $(LIB_PATH)includes/
+INC_PATH = ./includes/
 
 # COLORS
 GREEN = \033[0;32m
 RED = \033[0;31m
 RESET = \033[0m
 
-all: $(LIBFT) $(NAME)
+SRC_FILES = filler.c \
+			parser.c \
+			place.c \
+			hmap.c \
+			hmap2.c \
+			initialization.c
 
-$(DIR_O)/%.o: $(DIR_S)/%.c $(HEADER)printf.h
-		@mkdir -p $(DIR_O)
-		@$(CC) $(FLAGS) $(INCLUDES) -o $@ -c $<
+OBJ_FILES = $(SRC_FILES:.c=.o)
+
+FLAGS = -Wall -Wextra -Werror
+
+SRC = $(addprefix $(SRC_PATH), $(SRC_FILES))
+OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILES))
+INC = -I $(INC_PATH) -I $(LIB_HEADER)
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+		@make -C $(LIB_PATH)
+		@echo "$(NAME): $(GREEN)Creating LIBFT...$(RESET)"
+		@gcc $(FLAGS) $(OBJ)  $(INC) -L $(LIB_PATH) -lft -o $(NAME)
+		@echo "$(NAME): $(GREEN)Creating Fillerbot...$(RESET)"
+
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+		@mkdir -p $(OBJ_PATH)
+		@gcc $(FLAGS)  $(INC) -c $< -o $@
 		@echo "\n$(NAME): $(GREEN)object file was created$(RESET)"
 
-$(LIBFT):
-	@echo "$(NAME): $(GREEN)Creating $(LIBFT)...$(RESET)"
-	@make -C $(LIBFT_DIRECTORY)
-
-$(NAME): $(OBJS)
-	@make -C $(LIBFT)
-	@cp libft/libft.a ./$(NAME)
-	@ar rc $(NAME) $(OBJS)
-	@ranlib $(NAME)
-	@echo "$(NAME): $(GREEN)Creating Printf...$(RESET)"
-
-norme:
-	norminette ./libft/
-	@echo
-	norminette ./$(HEADER)/ ./$(LIB_HEADER)/
-	@echo
-	norminette ./$(DIR_S)/
-
 clean:
-	@rm -f $(OBJS)
-	@echo "$(NAME): $(RED)object files were deleted$(RESET)"
-	@rm -rf $(DIR_O)
-	@echo "$(NAME): $(RED)$(DIR_O) was deleted$(RESET)"
-	@make clean -C $(LIBFT)
+		@make -C $(LIB_PATH)/ clean
+		@echo "$(NAME): $(RED) $(LIB_PATH) objects were deleted$(RESET)"
+		@/bin/rm -rf $(OBJ_PATH)
+		@echo "$(NAME): $(RED)object files were deleted$(RESET)"
 
 fclean: clean
-	@rm -f $(NAME)
-	@echo "$(NAME): $(RED)$(NAME) was deleted$(RESET)"
-	@make fclean -C $(LIBFT)
-	@echo "$(NAME): $(RED)$(LIBFT) was deleted$(RESET)"
+		@make -C $(LIB_PATH)/ fclean
+		@/bin/rm -f $(NAME)
+		@echo "$(NAME): $(RED)$(NAME) was deleted$(RESET)"
 
 re: fclean all
 
-.PHONY: all obj norme clean fclean re
+.PHONY: all clean fclean re $(NAME)
