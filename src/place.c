@@ -24,24 +24,23 @@ int     check(t_filler *f, t_piece p, int y, int x)
 
     if (x + p.width > f->w || y + p.height > f->h)
         return (0);
-    i = 0;
+    i = -1;
     cross = 0;
-    while (i < p.height)
+    while (++i < p.height)
     {
-        j = 0;
-        while (j < p.width)
+        j = -1;
+        while (++j < p.width)
         {
             if (p.body[i][j] == '*')
             {
                 if (f->map[i + y][j + x] == f->en ||
-                    f->map[i + y][j + x] == f->en_small)
+                f->map[i + y][j + x] == f->en_small)
                     return (0);
-                else if (f->map[i + y][j + x] == f->my || f->map[i + y][j + x] == f->my_small)
+                else if (f->map[i + y][j + x] == f->my ||
+                f->map[i + y][j + x] == f->my_small)
                     cross++;
             }
-            j++;
         }
-        i++;
     }
     return (cross == 1 ? 1 : 0);
 }
@@ -74,6 +73,9 @@ int     get_sum(t_filler *f, t_piece p, int y, int x)
     return (res);
 }
 
+/*
+** free the memory of one piece
+*/
 
 void free_piece(t_piece *p)
 {
@@ -93,6 +95,17 @@ void free_piece(t_piece *p)
 }
 
 /*
+** just the begining of function place
+*/
+
+void place_help(t_point *res, int *min)
+{
+    res->x = 0;
+    res->y = 0;
+    *min = MYMAX_INT;
+}
+
+/*
 ** Function returns the t_point with final decision
 */
 
@@ -103,9 +116,7 @@ t_point place(t_filler *f, t_piece p)
     int j;
     int min;
 
-    res.x = 0;
-    res.y = 0;
-    min = MYMAX_INT;
+    place_help(&res, &min);
     i = 0;
     while (i <= f->h - p.height)
     {

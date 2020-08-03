@@ -52,7 +52,6 @@ int       create_map(t_filler *f, int height, int width)
     f->h = height;
     f->w = width;
     f->map_created = 1;
-
     if (!(f->map = (char **)ft_memalloc(height * sizeof(char *))))
         return (1);
     while (i < height)
@@ -60,7 +59,6 @@ int       create_map(t_filler *f, int height, int width)
         if (!(f->map[i] = (char *)ft_memalloc((width + 1) * sizeof(char))))
             return (1);
         ft_get_next_line(0, &line);
-        //f->map[i] = line + 4;
         ft_strcpy(f->map[i], line + 4);
         ft_strdel(&line);
         i++;
@@ -90,13 +88,11 @@ int        parse_map(t_filler *f, int height, int width)
             while (i < height)
             {
                 ft_get_next_line(0, &line);
-                //f->map[i] = line + 4;
                 ft_strcpy(f->map[i], line + 4);
                 ft_strdel(&line);
                 i++;
             }
             create_hmap_0(f);
         }
-    //write freeer map
     return (0);
 }

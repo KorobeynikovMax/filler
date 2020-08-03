@@ -20,6 +20,14 @@ void    init(t_filler *f)
 {
     f->over = 0;
     f->map_created = 0;
+    f->hmap = NULL;
+    f->map = NULL;
+    f->h = 0;
+    f->w = 0;
+    f->my = 'O';
+    f->my_small = 'o';
+    f->en = 'X';
+    f->en_small = 'x';
 }
 
 /*
@@ -32,6 +40,10 @@ int     isnull(t_point x)
         return (1);
     return (0);
 }
+
+/*
+** Function for getting free memory of map
+*/
 
 void    free_map2(t_filler *f)
 {
@@ -47,6 +59,10 @@ void    free_map2(t_filler *f)
     }
     ft_memdel((void **)&f->map);
 }
+
+/*
+** function for fet free memory of heat map
+*/
 
 void    free_map(t_filler *f)
 {
